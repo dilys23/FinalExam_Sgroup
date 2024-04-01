@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task todo</title>
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="header">
+      <img src="logoname.svg" alt="" />
+      <button class="addTask" onclick="pop()">+ New task</button>
+    </div>
+    <div class="container-task">
+      <div class="task-list" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="task-header">
+          <h5>To do</h5>
+        </div>
+        <div class="line"></div>
+        <div class="box-task todo" id="todo" >
+
+        </div>
+      </div>
+      <div class="task-list" id="doing" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="task-header">
+          <h5>Doing</h5>
+        </div>
+        <div class="line"></div>
+        <div class="box-task doing" id="doing" >
+        <div class="child-task"  draggable="true"  id="1"  ondragstart="drag(event)"  >
+          <div class="task-group">
+            <div class="task-top">
+              <div class="content">
+                <p>Marketing1</p>
+                <h4>Write SEO article for new product</h4>
+              </div>
+              <div class="btn-group">
+                <i class="bx bx-edit-alt"></i>
+                <i class="bx bx-trash-alt"></i>
+              </div>
+            </div>
+            <div class="task-bottom">
+              <div class="line"></div>
+              <p class="describe">
+                This is an existential moment for effective altruism and the
+                rationalist community write-large.
+              </p>
+              <div class="time">
+                <i class="bx bx-time"></i>
+                <span>timeday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="task-list" id="completed" ondrop="drop(event)" ondragover="allowDrop(event)" >
+        <div class="task-header">
+          <h5>Completed</h5>
+        </div>
+        <div class="line"></div>
+        <div class="box-task completed" id="completed" >
+
+        <div class="child-task" draggable="true"  id="2"  ondragstart="drag(event)" >
+          <div class="task-group">
+            <div class="task-top">
+              <div class="content">
+                <p>Marketing</p>
+                <h4>Write SEO article for new product</h4>
+              </div>
+              <div class="btn-group">
+                <i class="bx bx-edit-alt"></i>
+                <i class="bx bx-trash-alt"></i>
+              </div>
+            </div>
+            <div class="task-bottom">
+              <div class="line"></div>
+              <p class="describe">
+                This is an existential moment for effective altruism and the
+                rationalist community write-large.
+              </p>
+              <div class="time">
+                <i class="bx bx-time"></i>
+                <span>timeday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="task-list" id="blocked" ondrop="drop(event)" ondragover="allowDrop(event)" >
+        <div class="task-header">
+          <h5>Blocked</h5>
+        </div>
+        <div class="line"></div>
+        <div class="child-task" draggable="true"  id="3"  ondragstart="drag(event)">
+          <div class="task-group">
+            <div class="task-top">
+              <div class="content">
+                <p>Marketing</p>
+                <h4>Write SEO article for new product</h4>
+              </div>
+              <div class="btn-group">
+                <i class="bx bx-edit-alt"></i>
+                <i class="bx bx-trash-alt"></i>
+              </div>
+            </div>
+            <div class="task-bottom">
+              <div class="line"></div>
+              <p class="describe">
+                This is an existential moment for effective altruism and the
+                rationalist community write-large.
+              </p>
+              <div class="time">
+                <i class="bx bx-time"></i>
+                <span>timeday</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overlayer"></div>
+    <div class="box">
+      <div class="header">
+        <h3>Add new todo</h3>
+        <button class="close" onclick="popremove()">
+          <i class="bx bx-x"></i>
+        </button>
+      </div>
+      <input
+        type="text"
+        class="category"
+        placeholder="Category Etc Marketing"
+      />
+      <input type="text" class="title" placeholder="Title" />
+      <input type="text" class="contentTask" placeholder="Content" />
+      <button class="submitTask" id="enter">Submit</button>
+    </div>
+    <script>
+      const overlayer = document.querySelector(".overlayer");
+      const box = document.querySelector(".box");
+
+      function pop() {
+        overlayer.classList.add("pop");
+        box.classList.add("pop");
+      }
+      function popremove() {
+        overlayer.classList.remove("pop");
+        box.classList.remove("pop");
+      }
+
+      const tasksArray = localStorage.getItem("tasks")
+        ? JSON.parse(localStorage.getItem("tasks"))
+        : [];
+      const count = document.querySelectorAll(".count-value");
+      let taskCount = 0;
+      let isEditing = false;
+      function createTask(category, title, content) {
+        var now = new Date();
+        var datetime = now.toLocaleString();
+
+        // Insert date and time into HTML
+
+        const newTask = {
+          category: category,
+          title: title,
+          content: content,
+          status: "to do",
+          datetime: datetime,
+        };
+        tasksArray.push(newTask);
+        localStorage.setItem("tasks", JSON.stringify(tasksArray));
+        displayTasks();
+      }
+
+      function markAsDoing(i) {
+        tasksArray[i].status = "doing";
+        localStorage.setItem("tasks", JSON.stringify(tasksArray));
+        displayTasks();
+      }
+      function markAsComplete(i) {
+        tasksArray[i].status = "completed";
+        localStorage.setItem("tasks", JSON.stringify(tasksArray));
+        displayTasks();
+      }
+      function markAsTodo(i) {
+        tasksArray[i].status = "to do";
+        localStorage.setItem("tasks", JSON.stringify(tasksArray));
+        displayTasks();
+      }
+      function markAsBlock(i) {
+        tasksArray[i].status = "blocked";
+        localStorage.setItem("tasks", JSON.stringify(tasksArray));
+        displayTasks();
+      }
+
+      document.querySelector("#enter").addEventListener("click", (e) => {
+        const categoryInput = document.querySelector(".category");
+        const category = categoryInput.value.trim();
+        const titleInput = document.querySelector(".title");
+        const title = titleInput.value.trim();
+        const contentInput = document.querySelector(".contentTask");
+        const content = contentInput.value.trim();
+        const error = document.querySelector(".error");
+        if (!category || !title || !content || isEditing) {
+          // Xử lý lỗi ở đây nếu cần
+        } else {
+          createTask(category, title, content);
+          categoryInput.value = "";
+          titleInput.value = "";
+          contentInput.value = "";
+        }
+        e.preventDefault();
+      });
+
+      function displayTasks() {
+        let tasksHTML = "";
+        for (let i = 0; i < tasksArray.length; i++) {
+          const task = tasksArray[i];
+          tasksHTML += `
+        <div class="child-task todo" draggable="true"  id="${i}"  ondragstart="drag(event)" >
+          <div class="task-group">
+            <div class="task-top">
+              <div class="content">
+                <p>${task.category}</p>
+                <h4>${task.title}</h4>
+              </div>
+              <div class="btn-group">
+                <i class='bx bx-edit-alt'></i>
+                <i class='bx bx-trash-alt'></i>
+              </div>
+            </div>
+            <div class="task-bottom">
+              <div class="line"></div>
+              <p class="describe">${task.content}</p>
+              <div class="time">
+                <i class='bx bx-time'></i>
+                <span id= "datetime">${task.datetime}</span>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        }
+        document.querySelector(".box-task").innerHTML = tasksHTML;
+        popremove();
+      }
+      window.onload = function () {
+        // displayDate()
+        displayTasks();
+      };
+
+      //drag & drop 
+      function allowDrop(ev)
+      {
+        ev.preventDefault();
+      }
+      function drag(ev)
+      {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+      function drop(ev)
+      {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+    </script>
+  </body>
+</html>
