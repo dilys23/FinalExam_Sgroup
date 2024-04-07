@@ -1,6 +1,6 @@
 const overlayer = document.querySelector(".overlayer");
 const box = document.querySelector(".box");
-
+const boxedit = document.querySelector("#box-edit");
 function pop() {
   overlayer.classList.add("pop");
   box.classList.add("pop");
@@ -108,7 +108,7 @@ function displayTasks() {
   }
   document.querySelector(".box-task").innerHTML = tasksHTML;
   activateDeleteListeners();
-  activateEditListeners() ;
+  //  activateEditListeners();
   popremove();
 }
 window.onload = function () {
@@ -153,56 +153,62 @@ function deleteItem(i) {
   displayTasks();
  
 }
-function activateEditListeners() {
-  const editBtns = document.querySelectorAll(".btn-edit");
-  console.log("nhấn btn edit");
-  pop();
-  editBtns.forEach((editBtn, i) => {
-    editBtn.addEventListener("click", () => {
-      // Lấy nội dung của task tương ứng
-      const categoryText = tasksArray[i].category;
-      const titleText = tasksArray[i].title;
-      const contentText = tasksArray[i].content;
+// function activateEditListeners() {
+//   const editBtns = document.querySelectorAll(".btn-edit");
+//   console.log("nhấn btn edit");
+//   // overlayer.style.zIndex = "5";
+//   //  overlayer.style.opacity = "0.7";
+//     boxedit.style.opacity = "1";
+//   // overlayer.classList.add("pop");
+//   // box.classList.add("pop");
+//   console.log("hàm pop được thực thi");
+//   editBtns.forEach((editBtn, i) => {
+//     editBtn.addEventListener("click", () => {
+
+//       // Lấy nội dung của task tương ứng
+//       const categoryText = tasksArray[i].category;
+//       const titleText = tasksArray[i].title;
+//       const contentText = tasksArray[i].content;
      
-      const categoryInput = document.querySelector(".category"); // hoặc "#categoryInput" nếu sử dụng id
-      const titleInput = document.querySelector(".title"); // hoặc "#titleInput" nếu sử dụng id
-      const contentInput = document.querySelector(".contentTask"); // hoặc "#contentInput" nếu sử dụng id
+//       const categoryInput = document.querySelector("#box-edit .category"); 
+//       const titleInput = document.querySelector("#box-edit .title"); 
+//       const contentInput = document.querySelector("#box-edit .contentTask"); 
       
-      categoryInput.value = categoryText;
-      titleInput.value = titleText;
-      contentInput.value = contentText;
+//       categoryInput.value = categoryText;
+//       titleInput.value = titleText;
+//       contentInput.value = contentText;
 
-      isEditing = true;
+//       isEditing = true;
 
-      const  category = categoryInput.value.trim();
-      const title = titleInput.value.trim();
-      const content = contentInput.value.trim();
+//       const  category = categoryInput.value.trim();
+//       const title = titleInput.value.trim();
+//       const content = contentInput.value.trim();
       
-      // const editBtn = document.querySelector('.btn-edit');
+//       // const editBtn = document.querySelector('.btn-edit');
 
-      const editTaskHandler = function () {
-        const errors = document.querySelector("#error");
-        errors.style.display = "none";
-        if (!category  || !title || !content) {
-          setTimeout(() => {
-            errors.style.display = "block";
-          }, 200);
-        } else {
-          updateTask(categoryInput.value,titleInput.value, contentInput.value, i);
-          categoryInput.value = "";
-          titleInput.value = "";
-          contentInput.value = "";
-          // enterBtn.textContent = "Enter";
-          // enterBtn.id = "enter";
-          isEditing = false;
-          editBtn.removeEventListener("click", editTaskHandler);
-        }
-      };
+//       const editTaskHandler = function () {
+//         const errors = document.querySelector("#error");
+//         errors.style.display = "none";
+//         if (!category  || !title || !content) {
+//           setTimeout(() => {
+//             errors.style.display = "block";
+//           }, 200);
+//         } else {
+//           updateTask(categoryInput.value,titleInput.value, contentInput.value, i);
+//           categoryInput.value = "";
+//           titleInput.value = "";
+//           contentInput.value = "";
+//           // enterBtn.textContent = "Enter";
+//           // enterBtn.id = "enter";
+//           isEditing = false;
+//           editBtn.removeEventListener("click", editTaskHandler);
+//         }
+//       };
 
-      editBtn.addEventListener("click", editTaskHandler);
-    });
-  });
-}
+//       editBtn.addEventListener("click", editTaskHandler);
+//     });
+//   });
+// }
 
 
 function updateTask(category, title, content, i) {
@@ -218,9 +224,41 @@ function updateTask(category, title, content, i) {
   localStorage.setItem("tasks", JSON.stringify(tasksArray));
   displayTasks();
 
-  // const enterBtn = document.querySelector(".btn-edit");
-  // if (enterBtn) {
-  //   enterBtn.textContent = "Enter";
-  //   enterBtn.id = "enter";
-  // }
+
+}
+
+var btnEdit = document.getElementsByClassName("btn-edit");
+var btnSave = document.getElementsByClassName("btn-save");
+btnEdit.onclick = function ()
+{
+  boxedit.style.opacity = "1";
+  const categoryText = tasksArray[i].category;
+  const titleText = tasksArray[i].title;
+  const contentText = tasksArray[i].content;
+
+  const categoryInput = document.querySelector("#box-edit .category"); 
+  const titleInput = document.querySelector("#box-edit .title"); 
+  const contentInput = document.querySelector("#box-edit .contentTask");
+  
+  categoryInput.value = categoryText;
+  titleInput.value = titleText;
+  contentInput.value = contentText;
+
+  console.log("1. take data from form: ", categoryText, titleText, contentText)
+};
+
+btnSave.onclick = function ()
+{
+  event.preventDefault();
+  var categoryBox = document.querySelector("#box-edit .category"); 
+  var titleBox = document.querySelector("#box-edit .title"); 
+  var contentBox = document.querySelector("#box-edit .contentTask");
+
+  console.log("2. take data from modal: ", categoryBox, titleBox, contentBox);
+
+  tasksArray[i].category = categoryBox;
+ tasksArray[i].title = titleBox;
+  tasksArray[i].content = contentBox;
+
+  boxedit.style.opacity = "0";
 }
