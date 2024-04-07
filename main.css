@@ -1,4 +1,8 @@
 
+body
+{
+    overflow-y: hidden;
+}
 .header
 {
     display: flex;
@@ -36,7 +40,7 @@
 .task-list
 {
     /* position: absolute; */
-    width:  376px;
+    width:  385px;
     height: 692px;
     background-color: var(--white);
 }
@@ -91,7 +95,7 @@
  .child-task
  {
 
-    width: 373.76px;
+    width: 380px;
     height: 216px;
     margin-top: 30px;
     border-radius: 8px;
@@ -133,6 +137,7 @@ flex-direction: column;
 }
 .btn-delete, .btn-edit
 {
+    margin-right: 8px;
     border: none;
     background-color: var(--white);
 }
@@ -263,4 +268,10 @@ flex-direction: column;
         height: 350px;
     }
     
+}
+.box-task.todo
+{
+    max-height: 700px; /* Đặt chiều cao tối đa cho hộp nhiệm vụ */
+  overflow-y: auto; 
+  overflow-x: hidden;
 }

@@ -4,6 +4,7 @@ const box = document.querySelector(".box");
 function pop() {
   overlayer.classList.add("pop");
   box.classList.add("pop");
+  console.log("hàm pop được thực thi");
 }
 function popremove() {
   overlayer.classList.remove("pop");
@@ -152,10 +153,10 @@ function deleteItem(i) {
   displayTasks();
  
 }
-
 function activateEditListeners() {
   const editBtns = document.querySelectorAll(".btn-edit");
- pop();
+  console.log("nhấn btn edit");
+  pop();
   editBtns.forEach((editBtn, i) => {
     editBtn.addEventListener("click", () => {
       // Lấy nội dung của task tương ứng
@@ -163,9 +164,10 @@ function activateEditListeners() {
       const titleText = tasksArray[i].title;
       const contentText = tasksArray[i].content;
      
-      const categoryInput = document.querySelector("");
-      const titleInput = document.querySelector("");
-      const contentInput = document.querySelector("");
+      const categoryInput = document.querySelector(".category"); // hoặc "#categoryInput" nếu sử dụng id
+      const titleInput = document.querySelector(".title"); // hoặc "#titleInput" nếu sử dụng id
+      const contentInput = document.querySelector(".contentTask"); // hoặc "#contentInput" nếu sử dụng id
+      
       categoryInput.value = categoryText;
       titleInput.value = titleText;
       contentInput.value = contentText;
@@ -186,23 +188,20 @@ function activateEditListeners() {
             errors.style.display = "block";
           }, 200);
         } else {
-          updateItem(categoryInput.value,titleInput.value, contentInput.value, i);
+          updateTask(categoryInput.value,titleInput.value, contentInput.value, i);
           categoryInput.value = "";
           titleInput.value = "";
           contentInput.value = "";
           // enterBtn.textContent = "Enter";
           // enterBtn.id = "enter";
           isEditing = false;
-          editBtns.removeEventListener("click", editTaskHandler);
+          editBtn.removeEventListener("click", editTaskHandler);
         }
       };
 
-      editBtns.addEventListener("click", editTaskHandler);
-  
-
-
-   
-    })});
+      editBtn.addEventListener("click", editTaskHandler);
+    });
+  });
 }
 
 
