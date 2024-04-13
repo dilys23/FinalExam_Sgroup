@@ -33,7 +33,7 @@ function openModal(i) {
 
   statusInput.forEach(function (radio) {
     radio.addEventListener("click", function () {
-      statusInput.forEach(function (r) {
+      radios.forEach(function (r) {
         r.checked = false;
       });
       this.checked = true;
@@ -49,6 +49,7 @@ function closeModal() {
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    overlayer.classList.remove("pop");
   }
 };
 
@@ -75,9 +76,9 @@ function saveModal() {
     editingIndex = -1;
     displayTasks();
   }
-
+  overlayer.classList.remove("pop");
   modal.style.display = "none";
-  // location.reload();
+  location.reload();
 }
 
 function updateTask(category, title, content, status, datetime, i) {

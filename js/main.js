@@ -111,8 +111,6 @@ function displayTasks() {
         </div>
       </div>
     `;
-
-    // Thêm công việc mới vào phần tử box-task tương ứng
     document.querySelector(`.box-task.${task.status}`).insertAdjacentHTML('beforeend', taskHTML);
   });
 
@@ -159,6 +157,6 @@ function activateDeleteListeners() {
 function deleteItem(i) {
   tasksArray.splice(i, 1);
   localStorage.setItem("tasks", JSON.stringify(tasksArray));
-  // location.reload()
+ location.reload();
   displayTasks();
 }
