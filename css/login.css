@@ -21,8 +21,8 @@ body {
 }
 .child-container {
 	max-width: 1024px;
-	width: 1024px;
-    height:700px;
+	width: 850px;
+    height:600px;
 	position: relative;
     background-color:var(--white) ;
     display: flex;
