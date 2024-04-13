@@ -13,8 +13,7 @@ function popremove() {
 }
 
 const tasksArray = localStorage.getItem("tasks") ?
-  JSON.parse(localStorage.getItem("tasks")) :
-  [];
+  JSON.parse(localStorage.getItem("tasks")) : [];
 const count = document.querySelectorAll(".count-value");
 let taskCount = 0;
 let isEditing = false;
@@ -35,6 +34,7 @@ function createTask(category, title, content) {
   };
   tasksArray.push(newTask);
   localStorage.setItem("tasks", JSON.stringify(tasksArray));
+  location.reload();
   displayTasks();
 }
 
@@ -71,7 +71,6 @@ document.querySelector("#enter").addEventListener("click", (e) => {
   const content = contentInput.value.trim();
   const error = document.querySelector(".error");
   if (!category || !title || !content || isEditing) {
-    // Xử lý lỗi ở đây nếu cần
   } else {
     createTask(category, title, content);
     categoryInput.value = "";
@@ -121,7 +120,6 @@ function displayTasks() {
 
 
 window.onload = function () {
-  // displayDate()
   displayTasks();
 };
 
@@ -157,6 +155,6 @@ function activateDeleteListeners() {
 function deleteItem(i) {
   tasksArray.splice(i, 1);
   localStorage.setItem("tasks", JSON.stringify(tasksArray));
- location.reload();
+  location.reload();
   displayTasks();
 }

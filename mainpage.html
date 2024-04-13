@@ -1,73 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task todo</title>
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Task todo</title>
-  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/main.css" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <link rel="stylesheet" href="./css/modal.css">
-</head>
-
-<body>
-  <div class="header">
-    <img src="./image/logoname.svg" alt="" />
-    <button class="addTask" onclick="pop()">+ New task</button>
-  </div>
-  <div class="container-task">
-    <div class="task-list" id="todo" ondrop="drop(event, 'to do')" ondragover="allowDrop(event)">
-      <div class="task-header">
-        <h5>To do</h5>
+  <body>
+    <div class="header">
+      <img src="./image/logoname.svg" alt="" />
+      <button class="addTask" onclick="pop()">+ New task</button>
+    </div>
+    <div class="container-task">
+      <div
+        class="task-list"
+        id="todo"
+        ondrop="drop(event, 'to do')"
+        ondragover="allowDrop(event)"
+      >
+        <div class="task-header">
+          <h5>To do</h5>
+        </div>
+        <div class="line"></div>
+        <div class="box-task todo" id="to do"></div>
       </div>
-      <div class="line"></div>
-      <div class="box-task todo" id="to do">
-
+      <div
+        class="task-list"
+        id="doing"
+        ondrop="drop(event, 'doing')"
+        ondragover="allowDrop(event)"
+      >
+        <div class="task-header">
+          <h5>Doing</h5>
+        </div>
+        <div class="line"></div>
+        <div class="box-task doing" id="doing"></div>
+      </div>
+      <div
+        class="task-list"
+        id="completed"
+        ondrop="drop(event, 'completed')"
+        ondragover="allowDrop(event)"
+      >
+        <div class="task-header">
+          <h5>Completed</h5>
+        </div>
+        <div class="line"></div>
+        <div class="box-task completed" id="completed"></div>
+      </div>
+      <div
+        class="task-list"
+        id="blocked"
+        ondrop="drop(event, 'blocked')"
+        ondragover="allowDrop(event)"
+      >
+        <div class="task-header">
+          <h5>Blocked</h5>
+        </div>
+        <div class="line"></div>
+        <div class="box-task blocked" id="blocked"></div>
       </div>
     </div>
-    <div class="task-list" id="doing" ondrop="drop(event, 'doing')" ondragover="allowDrop(event)">
-      <div class="task-header">
-        <h5>Doing</h5>
+    <div class="overlayer"></div>
+    <div class="box">
+      <div class="header-box">
+        <h3>Add new todo</h3>
+        <button class="close" onclick="popremove()">
+          <i class="bx bx-x"></i>
+        </button>
       </div>
-      <div class="line"></div>
-      <div class="box-task doing" id="doing">
-
-      </div>
+      <input
+        type="text"
+        class="category"
+        placeholder="Category Etc Marketing"
+      />
+      <input type="text" class="title" placeholder="Title" />
+      <input type="text" class="contentTask" placeholder="Content" />
+      <button class="submitTask" id="enter">Submit</button>
     </div>
-    <div class="task-list" id="completed" ondrop="drop(event, 'completed')" ondragover="allowDrop(event)">
-      <div class="task-header">
-        <h5>Completed</h5>
-      </div>
-      <div class="line"></div>
-      <div class="box-task completed" id="completed">
-      </div>
-    </div>
-    <div class="task-list" id="blocked" ondrop="drop(event, 'blocked')" ondragover="allowDrop(event)">
-      <div class="task-header">
-        <h5>Blocked</h5>
-      </div>
-      <div class="line"></div>
-      <div class="box-task blocked" id="blocked">
-
-      </div>
-
-    </div>
-  </div>
-  <div class="overlayer"></div>
-  <div class="box">
-    <div class="header-box">
-      <h3>Add new todo</h3>
-      <button class="close" onclick="popremove()">
-        <i class="bx bx-x"></i>
-      </button>
-    </div>
-    <input type="text" class="category" placeholder="Category Etc Marketing" />
-    <input type="text" class="title" placeholder="Title" />
-    <input type="text" class="contentTask" placeholder="Content" />
-    <button class="submitTask" id="enter">Submit</button>
-  </div>
-  <div id="error"></div>
+    <div id="error"></div>
     <!-- Modal content -->
     <div id="myModal" class="modal">
       <div class="header-box">
@@ -78,25 +95,38 @@
       </div>
       <div class="modal-body">
         <form action="">
-          <input type="text" class="titleTaskModal" id="titleTaskModal" placeholder="Category Etc Marketing" />
-          <input type="text" class="detailTaskModal" id="detailTaskModal"  placeholder="Title" />
-          <input type="text" class="contentModal" id="contentModal" placeholder="Content" />
+          <input
+            type="text"
+            class="titleTaskModal"
+            id="titleTaskModal"
+            placeholder="Category Etc Marketing"
+          />
+          <input
+            type="text"
+            class="detailTaskModal"
+            id="detailTaskModal"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            class="contentModal"
+            id="contentModal"
+            placeholder="Content"
+          />
           <div class="task-type">
-            <input type="radio" id="todo"/><label>To do</label>
-            <input type="radio" id="doing"/><label for="">Doing</label>
-            <input type="radio" id="completed"/><label for="">Completed</label>
+            <input type="radio" id="todo" /><label>To do</label>
+            <input type="radio" id="doing" /><label for="">Doing</label>
+            <input type="radio" id="completed" /><label for="">Completed</label>
             <input type="radio" id="blocked" /><label for="">Blocked</label>
           </div>
-          
-        
-          <button type="button" class="btn-save" onclick="saveModal()">Save</button>
+
+          <button type="button" class="btn-save" onclick="saveModal()">
+            Save
+          </button>
         </form>
       </div>
-
-  
-  </div>
-  <script src="./js/main.js"></script>
-  <script src="./js/editTask.js"></script>
-</body>
-
+    </div>
+    <script src="./js/main.js"></script>
+    <script src="./js/editTask.js"></script>
+  </body>
 </html>

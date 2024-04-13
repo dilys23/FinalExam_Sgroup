@@ -1,96 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <title>Login</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/login.css">
-</head>
-<body>
-    <!-- <div class="container"> -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
 
-   
-    <img src="./image/image1.svg" alt="" class="image1" style="position: absolute;">   
-    <img src="./image/image2.svg" alt=""class="image2" style="position: absolute;">  
+    <img
+      src="./image/image1.svg"
+      alt=""
+      class="image1"
+      style="position: absolute"
+    />
+    <img
+      src="./image/image2.svg"
+      alt=""
+      class="image2"
+      style="position: absolute"
+    />
     <div class="child-container">
-      
-        <div class="imagelogin" >
-            <!-- <img src="loginimage.png" alt=""> -->
-           
+      <div class="imagelogin">
+        <!-- <img src="loginimage.png" alt=""> -->
+      </div>
+      <div class="detail-info">
+        <div class="header">
+          <h2 class="title">
+            <a href="#" onclick="switchForm('login', event)">Login</a>
+          </h2>
+          <h2 class="title">
+            <a href="#" onclick="switchForm('signup', event)">Signup</a>
+          </h2>
         </div>
-        <div class="detail-info">
-            <div class="header">
-                <h2 class="title"><a href="#" onclick="switchForm('login', event)">Login</a></h2>
-                <h2 class="title"> <a href="#" onclick="switchForm('signup', event)">Signup</a></h2>
+        <form class="login active" id="form-login">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-group">
+              <input type="email" id="email" placeholder="Email address" />
+              <i class="bx bx-envelope"></i>
             </div>
-            <form class="login active" id="form-login">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <div class="input-group">
-                        <input type="email" id="email" placeholder="Email address">
-                        <i class='bx bx-envelope'></i>
-                    </div>
-                </div>
+          </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-group">
-                        <input type="password" pattern=".{8,}" id="password" placeholder="Your password">
-                        <i class='bx bx-lock-alt' ></i>
-                    </div>
-                    <span class="help-text">At least 8 characters</span>
-                    
-                   
-                </div>
-                <div class="btn_Remember">
-                    <input type="radio"><p>Remember me</p>
-                </div>
-                <button type="submit" class="btn-submit" id="login-btn">Login</button>
-              
-            
-            </form>
-            <form class="signup ">
-                <div class="form-group">
-                    <label for="name">Username</label>
-                    <div class="input-group">
-                        <input type="text" id="name" placeholder="User name">
-                        <i class='bx bx-user'></i>
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <div class="input-group">
-                        <input type="email" id="email" placeholder="Email address">
-                        <i class='bx bx-envelope'></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-group">
-                        <input type="password" pattern=".{8,}" id="password" placeholder="Your password">
-                        <i class='bx bx-lock-alt' ></i>
-                    </div>
-                    <span class="help-text">At least 8 characters</span>
-                </div>
-                <div class="form-group">
-                    <label for="confirm-pass">Confirm password</label>
-                    <div class="input-group">
-                        <input type="password" id="confirm-pass" placeholder="Enter password again">
-                        <i class='bx bx-lock-alt' ></i>
-                    </div>
-                    <span class="help-text">Confirm password must be same with password</span>
-                </div>
-                <button type="submit" class="btn-submit">Register</button>
-            </form>
-        </div>
-        
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                pattern=".{8,}"
+                id="password"
+                placeholder="Your password"
+              />
+              <i class="bx bx-lock-alt"></i>
+            </div>
+            <span class="help-text">At least 8 characters</span>
+          </div>
+          <div class="btn_Remember">
+            <input type="radio" />
+            <p>Remember me</p>
+          </div>
+          <button type="submit" class="btn-submit" id="login-btn">Login</button>
+        </form>
+        <form class="signup">
+          <div class="form-group">
+            <label for="name">Username</label>
+            <div class="input-group">
+              <input type="text" id="name" placeholder="User name" />
+              <i class="bx bx-user"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-group">
+              <input type="email" id="email" placeholder="Email address" />
+              <i class="bx bx-envelope"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                pattern=".{8,}"
+                id="password"
+                placeholder="Your password"
+              />
+              <i class="bx bx-lock-alt"></i>
+            </div>
+            <span class="help-text">At least 8 characters</span>
+          </div>
+          <div class="form-group">
+            <label for="confirm-pass">Confirm password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                id="confirm-pass"
+                placeholder="Enter password again"
+              />
+              <i class="bx bx-lock-alt"></i>
+            </div>
+            <span class="help-text"
+              >Confirm password must be same with password</span
+            >
+          </div>
+          <button type="submit" class="btn-submit">Register</button>
+        </form>
+      </div>
     </div>
-    
-   
-<!-- </div> -->
+
     <script src="./js/login.js"></script>
-</body>
+  </body>
 </html>

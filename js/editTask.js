@@ -1,10 +1,10 @@
-// Get the modal
 var modal = document.getElementById("myModal");
 var btn = document.querySelector("#editTask");
 var btnSave = document.getElementById("save");
 var span = document.getElementsByClassName("close")[0];
 // let isEditing = false;
 let editingIndex = -1;
+
 
 function openModal(i) {
   overlayer.classList.add("pop");
@@ -16,24 +16,23 @@ function openModal(i) {
   const titleText = tasksArray[i].title;
   const contentText = tasksArray[i].content;
   const statusText = tasksArray[i].status;
-  const categoryInput = document.getElementById("titleTaskModal"); // hoặc "#categoryInput" nếu sử dụng id
+  const categoryInput = document.getElementById("titleTaskModal");
   const titleInput = document.getElementById("detailTaskModal");
   const contentInput = document.getElementById("contentModal");
-  var statusInput = document.querySelectorAll(`.task-type input[type=radio]#${statusText}`);
+  const statusRadios = document.querySelectorAll(`.task-type input[type=radio]`);
   categoryInput.value = categoryText;
   titleInput.value = titleText;
   contentInput.value = contentText;
-  statusInput.checked = true;
-  console.log("1. take data from form: ", categoryInput.value, titleInput.value, contentInput.value);
-  var radios = document.querySelectorAll("input[type=radio]");
-  statusInput.forEach(function (radio) {
-    radio.checked = false;
-  });
-  statusInput[0].checked = true;
+  statusRadios.forEach(function (radio) {
+    if (radio.id === statusText) {
+      radio.checked = true;
 
-  statusInput.forEach(function (radio) {
+    }
+  });
+  console.log("1. take data from form: ", categoryInput.value, titleInput.value, contentInput.value);
+  statusRadios.forEach(function (radio) {
     radio.addEventListener("click", function () {
-      radios.forEach(function (r) {
+      statusRadios.forEach(function (r) {
         r.checked = false;
       });
       this.checked = true;
@@ -67,6 +66,7 @@ function saveModal() {
   console.log("2. take data from modal: ", categoryInput, titleInput, contentInput, status, datetime);
 
   if (!categoryInput || !titleInput || !contentInput || !status) {
+    alert("Please select information");
     setTimeout(() => {
       errors.style.display = "block";
     }, 200);
