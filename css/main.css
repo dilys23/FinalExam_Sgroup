@@ -1,7 +1,7 @@
 
 body
 {
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 .header
 {
@@ -175,11 +175,12 @@ flex-direction: column;
     border-radius: 6px;
     opacity: 0;
 }
+
 .box.pop
 {
     opacity: 1;
 }
-.box .header 
+.box .header , .modal .header 
 {
     justify-content: center;
     align-items: center;
@@ -193,7 +194,7 @@ flex-direction: column;
     border: none;
     background-color: var(--white);
 }
-.box input{
+.box input, .modal input{
     padding: 12px 20px 12px 25px;
 	outline: none;
 	border-radius: 6px;
@@ -203,35 +204,35 @@ flex-direction: column;
     margin-bottom: 10px;
 }
 
-.box input:focus,
-.box input:not(:placeholder-shown) {
+.box input:focus, .modal input:focus,
+.box input:not(:placeholder-shown), .modal input:not(:placeholder-shown) {
 	border-color: var(--blue);
 	background: var(--grey);
 }
-.box input:focus + i,
-.box input:not(:placeholder-shown) + i {
+.box input:focus + i, .modal input:focus + i,
+.box input:not(:placeholder-shown) + i, .modal input:not(:placeholder-shown) + i {
 	color: var(--blue);
 }
-.box input:focus:valid {
+.box input:focus:valid , .modal input:focus:valid {
 	box-shadow: 0 0 0 4px var(--light-green);
 }
-.box input:valid:not(:placeholder-shown) {
+.box input:valid:not(:placeholder-shown), .modal input:valid:not(:placeholder-shown) {
 	border-color: var(--green);
 }
-.box input:valid:not(:placeholder-shown) + i {
+.box input:valid:not(:placeholder-shown) + i , .modal input:valid:not(:placeholder-shown) + i {
 	color: var(--green);
 }
-.box input:invalid:not(:placeholder-shown) {
+.box input:invalid:not(:placeholder-shown), .modal input:invalid:not(:placeholder-shown) {
 	border-color: var(--red);
 }
-.box input:invalid:not(:placeholder-shown) + i {
+.box input:invalid:not(:placeholder-shown) + i, .modal input:invalid:not(:placeholder-shown) + i {
 	color: var(--red);
 }
-.box input:focus:invalid {
+.box input:focus:invalid, .modal input:focus:invalid {
 	box-shadow: 0 0 0 4px var(--light-red);
 }
-.box input:focus,
-.box input:focus:placeholder-shown {
+.box input:focus, .modal input:focus,
+.box input:focus:placeholder-shown, .modal input:focus:placeholder-shown {
 	box-shadow: 0 0 0 4px var(--bs);
 }
 
@@ -244,12 +245,13 @@ flex-direction: column;
     text-align: start;
     height: 30%;
 }
-.submit
+.submit, .btn-save
 {
+    width: 100%;
     height: 10%;
     border-radius: 5px;
 }
-.submit:hover
+.submit:hover, .btn-save:hover
 {
     background-color: #7fc7c7;
 }

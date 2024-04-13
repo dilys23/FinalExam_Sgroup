@@ -33,7 +33,7 @@ body {
 {
 
 	width: 50%;
-	background-image: url('loginimage.png');
+	background-image: url('../image/loginimage.png');
 	border-radius: 20px;
     background-size: cover; 
 }
